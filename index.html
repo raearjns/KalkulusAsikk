@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kalkulus Asikk - Web Pembelajaran</title>
+<link>   
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- BAGIAN HTML (index.html) -->
+  <header>
+    <div class="container">
+      <div class="nav">
+        <div class="brand" onclick="navigateTo('home')">
+          <!-- LOGO BARU: Opsi 1 (Modern Minimalist SVG) -->
+          <div class="logo">
+            <svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Background: Rounded Square Simple -->
+              <rect width="100" height="100" rx="20" fill="#2196f3"/>
+              
+              <!-- Simbol Integral: Clean & Bold -->
+              <!-- Menggunakan path sederhana tanpa ornamen -->
+              <path d="M58.5 23C54.5 23 52 25.5 52 30.5V64C52 72.5 47.5 77 39.5 77C35.5 77 33 74.5 33 69.5" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M41.5 77C45.5 77 48 74.5 48 69.5V36C48 27.5 52.5 23 60.5 23C64.5 23 67 25.5 67 30.5" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          
+          <div>
+            <div style="font-size:16px">Kalkulus Asikk</div>
+            <div style="font-size:11px;color:var(--muted); opacity:0.8;">Web Pembelajaran</div>
+          </div>
+        </div>
+        
+        <button class="hamburger" onclick="toggleMenu()">
+          <svg class="icon icon-lg" viewBox="0 0 24 24">
+            <path d="M3 12h18M3 6h18M3 18h18"/>
+          </svg>
+        </button>
+
+        <nav class="nav-links" id="nav-links">
+          <button onclick="navigateTo('home')" id="btn-home" class="active-link">Beranda</button>
+          <button onclick="navigateTo('materi')" id="btn-materi">Materi</button>
+          <button onclick="navigateTo('latihan')" id="btn-latihan">Latihan</button>
+          <button onclick="navigateTo('tentang')" id="btn-tentang">Tentang</button>
+          <button id="theme-toggle" class="theme-toggle-btn" title="Ganti Tema">
+            <!-- Icon akan diisi JS -->
+          </button>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    
+    <!-- HOME -->
+    <section id="home" class="page-section active">
+      <div class="math-bg-symbol" style="top: 5%; left: 2%; font-size: 8rem;">∫</div>
+      <div class="math-bg-symbol" style="bottom: 10%; right: 5%; font-size: 6rem; animation-delay: 1s;">∑</div>
+      <div class="math-bg-symbol" style="top: 15%; right: 20%; font-size: 4rem; animation-delay: 2s;">π</div>
+      
+      <div class="hero-wrapper">
+        <div class="hero-text">
+          <h1>Kuasai Kalkulus <br><span style="color:var(--accent)">Tanpa Pusing.</span></h1>
+          <p>Platform interaktif untuk mahasiswa. Pahami konsep turunan, integral, dan limit dengan visualisasi dan contoh nyata.</p>
+          <div style="margin-top:30px">
+            <button class="btn" onclick="navigateTo('materi')">
+              Mulai Belajar 
+              <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+        
+        <div class="hero-cards-col">
+          <div class="hero-card">
+             <h3 style="margin:0 0 12px 0; display:flex; align-items:center; gap:10px; font-size: 1.4rem;">
+              <span style="background:var(--bg); padding:8px; border-radius:8px; display:flex; align-items:center; justify-content:center;">
+                <svg class="icon icon-lg" style="color:var(--accent)" viewBox="0 0 24 24">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+              </span> 
+              Materi Lengkap
+            </h3>
+            <p style="font-size:0.95rem">Limit, Turunan, Integral Tentu & Tak Tentu. Disusun sistematis dan mudah dipahami.</p>
+          </div>
+
+          <div class="hero-card" style="border-left: 6px solid var(--muted);">
+            <div id="fact-slider-area" class="fact-slider-container">
+              <button class="slider-arrow prev" onclick="prevSlide()">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+              </button>
+              
+              <div id="fact-content" class="fact-slider-content active"></div>
+              
+              <button class="slider-arrow next" onclick="nextSlide()">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+            </div>
+            <div class="slider-dots" id="slider-dots"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MATERI LIST -->
+    <section id="materi" class="page-section">
+      <div style="text-align:center; margin-bottom: 30px;">
+        <h2 style="color:var(--muted); font-size:2rem; display:inline-block; border-bottom:3px solid var(--accent);">Materi Kalkulus</h2>
+      </div>
+      <div class="cards" id="cards">
+        <!-- 1. Pengertian Kalkulus -->
+        <div class="card featured-card">
+          <img src="img/dasar.png" alt="Ilustrasi Kalkulus">
+          <div class="content">
+            <h3 style="font-size: 1.8rem; margin-bottom: 15px;">Pengertian Kalkulus</h3>
+            <p style="font-size: 1.2rem; line-height: 1.6; margin-bottom: 25px; color: var(--text);">
+              Cabang matematika yang mempelajari <strong>perubahan</strong> dan <strong>pengukuran</strong> hal-hal yang terus berubah. Fokus utamanya adalah studi tentang Laju Perubahan (Turunan) & Akumulasi (Integral).
+              <br><br>
+              Dalam kehidupan sehari-hari, kalkulus digunakan untuk berbagai hal praktis, seperti menghitung kecepatan kendaraan yang berubah-ubah, memprediksi pertumbuhan populasi, hingga analisis ekonomi dan teknik.
+            </p>
+          </div>
+        </div>
+
+        <p style="grid-column: 1 / -1; text-align: center; margin: 10px 0; font-size: 1.1rem; color: var(--text); opacity: 0.9;">
+          Pilih topik yang ingin Anda pelajari hari ini.
+        </p>
+
+        <!-- 2. Bilangan Real -->
+        <div class="card">
+          <h3>Bilangan Real & Fungsi</h3>
+          <p>Sistem bilangan dasar dan pemetaan input ke output dalam matematika.</p>
+          <div class="example">f(x) = 2x + 5, di mana x ∈ R</div>
+          <!-- 1 Gambar -->
+          <button class="btn-detail" data-title="Bilangan Real & Fungsi" 
+            data-desc="Sistem bilangan real adalah himpunan bilangan yang mencakup bilangan rasional dan irasional. Fungsi adalah relasi yang memetakan setiap anggota himpunan asal (domain) ke tepat satu anggota himpunan kawan (kodomain)."
+            data-image="img/bilangan.png" 
+            onclick="openDetail(this)">Lihat Detail</button>
+        </div>
+        
+        <!-- 3. Grafik Fungsi (2 GAMBAR) -->
+        <div class="card">
+          <h3>Grafik Fungsi</h3>
+          <p>Representasi visual dari hubungan antar variabel pada bidang kartesius.</p>
+          <div class="example">Plot y = x² menghasilkan grafik parabola</div>
+          <!-- Gunakan pemisah | untuk multiple images -->
+          <button class="btn-detail" data-title="Grafik Fungsi" 
+            data-desc="Grafik fungsi adalah representasi visual dari suatu fungsi yang digambarkan pada sistem koordinat Kartesius."
+            data-image="img/grafik1.png|img/grafik2.png"
+            onclick="openDetail(this)">Lihat Detail</button>
+        </div>
+        
+        <!-- 4. Konsep Limit -->
+        <div class="card">
+          <h3>Konsep Limit</h3>
+          <p>Nilai pendekatan suatu fungsi saat input mendekati titik tertentu.</p>
+          <div class="example">lim(x→c) f(x) = L</div>
+          <button class="btn-detail" data-title="Konsep Limit" 
+            data-desc="Limit menjelaskan perilaku fungsi saat inputnya mendekati nilai tertentu, bukan tepat pada nilai tersebut."
+            data-image="img/limit.png"
+            onclick="openDetail(this)">Lihat Detail</button>
+        </div>
+        
+        <!-- 5. Kekontinuan -->
+        <div class="card">
+          <h3>Kekontinuan Fungsi</h3>
+          <p>Kondisi di mana grafik fungsi tidak terputus atau berlubang.</p>
+          <div class="example">Kontinu jika lim(x→c) f(x) = f(c)</div>
+          <button class="btn-detail" data-title="Kekontinuan Fungsi" 
+            data-desc="Sebuah fungsi dikatakan kontinu di suatu titik jika grafiknya tidak terputus di titik tersebut."
+            data-image="img/kontinu.png"
+            onclick="openDetail(this)">Lihat Detail</button>
+        </div>
+        
+        <!-- 6. Turunan -->
+        <div class="card">
+          <h3>Konsep Turunan</h3>
+          <p>Laju perubahan sesaat atau gradien garis singgung kurva.</p>
+          <div class="example">f'(x) = dy/dx</div>
+          <button class="btn-detail" data-title="Konsep Turunan" 
+            data-desc="Turunan mengukur sensitivitas perubahan nilai fungsi terhadap perubahan nilai inputnya."
+            data-image="img/turunan.png"
+            onclick="openDetail(this)">Lihat Detail</button>
+        </div>
+        
+        <!-- 7. Integral (4 GAMBAR) -->
+        <div class="card">
+          <h3>Integral</h3>
+          <p>Akumulasi jumlah atau area di bawah kurva fungsi.</p>
+          <div class="example">∫ f(x) dx</div>
+          <!-- Gunakan pemisah | untuk multiple images -->
+          <button class="btn-detail" data-title="Integral" 
+            data-desc="Integral adalah kebalikan dari turunan (antiturunan). Integral digunakan untuk menghitung luas daerah."
+            data-image="img/integral1.png|img/integral2.png|img/integral3.png|img/integral4.png"
+            onclick="openDetail(this)">Lihat Detail</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- DETAIL MATERI & CONTOH SOAL -->
+    <section id="materi-detail" class="page-section">
+      <div style="max-width: 900px; margin: 0 auto;">
+        <button onclick="navigateTo('materi')" class="btn-back">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Kembali ke Materi
+        </button>
+        <div class="detail-content-box">
+          <div class="detail-header">
+            <h1 id="detail-title">Judul Materi</h1>
+            <p id="detail-desc" class="detail-desc">Deskripsi lengkap materi akan muncul di sini.</p>
+          </div>
+          
+          <!-- CONTAINER MEDIA (GAMBAR/SLIDER) -->
+          <div class="detail-media">
+            <!-- Placeholder jika tidak ada gambar -->
+            <div id="detail-placeholder" class="media-placeholder">
+              <svg class="icon icon-lg" style="width:48px; height:48px; margin-bottom:10px; opacity:0.5;" viewBox="0 0 24 24">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+              <p style="font-weight:600;">Gambar Belum Tersedia</p>
+              <small>Materi visual untuk topik ini belum diunggah.</small>
+            </div>
+            
+            <!-- Wadah Slider (Dibuat dinamis oleh JS) -->
+            <div id="slider-container" style="width:100%; height:100%; display:none;">
+                <!-- Isi slider akan di-generate disini -->
+            </div>
+          </div>
+
+        </div>
+        <div id="detail-soal-section">
+          <h2 class="soal-section-title">
+            <svg class="icon icon-lg" style="color:var(--accent)" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+            Contoh Soal & Pembahasan
+          </h2>
+          <div class="soal-container" id="soal-list-container"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LATIHAN (REDESIGNED - GAME ARENA STYLE) -->
+    <section id="latihan" class="page-section">
+      
+      <!-- Hero Banner Khusus Latihan -->
+      <div id="latihan-hero">
+        <div class="latihan-bg-deco">∫</div>
+        <h2>Arena Tantangan</h2>
+        <p>Uji pemahamanmu di setiap level. Siap menjadi master kalkulus?</p>
+      </div>
+
+      <!-- Dashboard Pilihan Kuis -->
+      <div id="latihan-dashboard">
+        <!-- Topik Spesifik akan di-generate JS -->
+      </div>
+
+      <!-- Final Boss Zone (Terpisah & Centered) -->
+      <div id="latihan-boss-zone">
+        <div class="latihan-topic-card latihan-special-card" onclick="startQuiz('final')">
+          <div class="latihan-icon-wrap">★</div>
+          <div class="latihan-info">
+            <div class="latihan-card-title">Final Boss</div>
+            <div class="latihan-meta">15 Soal Campuran • Tingkat Lanjut</div>
+          </div>
+          <div class="latihan-arrow" style="font-size: 1.5rem;">➜</div>
+        </div>
+      </div>
+
+      <!-- Interface Kuis (Focus Mode & Navigation) -->
+      <div id="quiz-interface">
+        <!-- Tombol Keluar -->
+        <button class="quiz-exit-btn" onclick="quitQuiz()" title="Keluar dari Latihan">✕</button>
+
+        <div class="quiz-progress-bar">
+          <div class="quiz-progress-fill" id="quiz-progress"></div>
+        </div>
+        <div class="quiz-content">
+          <h4 style="color:var(--accent); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;" id="quiz-topic-label">Topik</h4>
+          <div class="quiz-question-text" id="quiz-question">Pertanyaan...</div>
+          <div class="quiz-options" id="quiz-options">
+            <!-- Buttons generated via JS -->
+          </div>
+          
+          <!-- Tombol Navigasi Kuis (Sebelumnya / Selanjutnya) -->
+          <div class="quiz-nav">
+            <button id="btn-prev-q" class="quiz-nav-btn" onclick="prevQuestion()">← Sebelumnya</button>
+            <button id="btn-next-q" class="quiz-nav-btn" onclick="nextQuestion()">Selanjutnya →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Result Screen -->
+      <div id="quiz-result">
+        <div class="score-circle" id="score-value">0</div>
+        <h2 style="color:var(--muted);">Kuis Selesai!</h2>
+        <p id="score-message">Pesan hasil...</p>
+        <button class="btn" onclick="resetQuiz()" style="margin-top:20px;">Kembali ke Arena</button>
+      </div>
+    </section>
+
+    <!-- TENTANG -->
+    <section id="tentang" class="page-section">
+      <!-- PERBAIKAN: Style dipindahkan ke parent div agar Judul & Isi sejajar -->
+      <div class="about-intro" style="max-width: 900px; margin: 0 auto; text-align: left;">
+        <h2 style="color:var(--muted); margin-bottom: 24px; border-bottom: 2px solid var(--accent); display: inline-block; padding-bottom: 10px;">Tentang Proyek</h2>
+        <p style="line-height: 1.8; font-size: 1.1rem; color: var(--text);">
+          Kalkulus Asikk hadir sebagai terobosan pembelajaran digital yang mentransformasi kerumitan Kalkulus menjadi materi visual yang intuitif dan terstruktur. Kami merancang platform ini untuk mengurai konsep abstrak menjadi logika sederhana yang mudah dicerna, menjembatani kesenjangan antara teori akademis dan pemahaman nyata.
+          <br><br>
+          Kami ingin mengubah pandangan bahwa matematika itu sulit dan menakutkan. Misi kami sederhana: membuat rumus-rumus rumit menjadi masuk akal dan mudah dipahami. Secara khusus, website ini dibuat untuk memenuhi Tugas Besar mata kuliah Kalkulus. Ini adalah wujud nyata keseriusan kami dalam belajar dan berinovasi untuk membantu sesama mahasiswa.
+        </p>
+      </div>
+      
+      <div class="dosen-card-wrapper" style="margin-top: 60px;">
+        <div class="dosen-card-pro">
+            <div class="dosen-pro-img-container">
+               <img src="" alt="Foto Dosen" class="dosen-pro-img">
+            </div>
+            <div class="dosen-pro-content">
+              <div class="dosen-pro-role">Dosen Pengampu</div>
+              <h3 class="dosen-pro-name">Masnia, S.Pd, M.Pd</h3>
+              <div class="dosen-pro-desc">
+                Membimbing pengembangan proyek Kalkulus Asikk dengan fokus pada akurasi materi, validasi konsep matematika, dan pendekatan pedagogis yang efektif.
+              </div>
+              <div class="dosen-pro-meta">
+                Universitas Dian Nusantara — Fakultas Teknik Informatika
+              </div>
+            </div>
+        </div>
+      </div>
+      <h3 style="text-align:center; color:var(--muted); margin-top: 50px; margin-bottom:30px;">Tim Pengembang (4 Anggota)</h3>
+      <div class="profile-grid" id="team-grid">
+        <!-- Tim 1 -->
+        <div class="profile-card">
+          <div class="profile-img-wrap"><img src="img/image1.jpeg" alt="Nama 1" class="profile-img"></div>
+          <h3>Zayyan Ayyub H.</h3>
+          <div class="profile-role">Project Manager</div>
+          <div class="profile-id">NIM: 411251082</div>
+        </div>
+        <!-- Tim 2 -->
+        <div class="profile-card">
+          <div class="profile-img-wrap"><img src="img/image.jpeg" alt="Nama 2" class="profile-img"></div>
+          <h3>Rae Arjuna S.</h3>
+          <div class="profile-role">UI/UX Designer</div>
+          <div class="profile-id">NIM: 411251029</div>
+        </div>
+        <!-- Tim 3 -->
+        <div class="profile-card">
+          <div class="profile-img-wrap"><img src=" " alt="Nama 3" class="profile-img"></div>
+          <h3>Zaskia Filiana</h3>
+          <div class="profile-role">Researcher</div>
+          <div class="profile-id">NIM: 411251031</div>
+        </div>
+        <!-- Tim 4 -->
+        <div class="profile-card">
+          <div class="profile-img-wrap"><img src="img/image2.jpeg" alt="Nama 4" class="profile-img"></div>
+          <h3>Faiz Achmad F.</h3>
+          <div class="profile-role">QA Engineer</div>
+          <div class="profile-id">NIM: 411251040</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODAL KELUAR (CUSTOM) -->
+    <div id="exit-modal" class="custom-modal">
+      <div class="modal-content">
+        <h3>Keluar Latihan?</h3>
+        <p>Progres latihan Anda saat ini tidak akan disimpan.</p>
+        <div class="modal-actions">
+          <button class="btn-modal-cancel" onclick="closeExitModal()">Batal</button>
+          <button class="btn-modal-confirm" onclick="confirmExit()">Ya, Keluar</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+  
+  <footer>
+    &copy; 2025 Kalkulus Asikk Web.TI UNDIRA.
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
